@@ -1,0 +1,18 @@
+{
+  "name": "eleven_space_program",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start:back": "cd back && npm run start:dev",
+    "start:front": "cd front && npm run astro dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "workspaces": [
+  "front",
+  "back"
+]
+}
