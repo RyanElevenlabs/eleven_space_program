@@ -28,3 +28,12 @@ model Rocket {
   createdAt    DateTime  @default(now())
   updatedAt    DateTime  @updatedAt
 }
+
+model Planet {
+  id          Int      @id @default(autoincrement())
+  name        String
+  diameter    Int
+  mass        Float
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
