@@ -11,11 +11,50 @@ datasource db {
 }
 
 model Astronaut {
-  id Int @id @default(autoincrement())
-  firstName String 
-  lastName String 
+  id          Int       @id @default(autoincrement())
+  firstName   String
+  lastName    String
   nationality String
-  mission String
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  rocket      Rocket    @relation(fields: [rocketId], references: [id])
+  rocketId    Int       @unique
+  mission     Mission[] @relation("AstronautMission")
+  planet      Planet?   @relation(fields: [planetId], references: [id])
+  planetId    Int?
+}
+
+model Rocket {
+  id          Int         @id @default(autoincrement())
+  name        String
+  nationality String
+  year        Int
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  astronaut   Astronaut[]
+  mission     Mission[]   @relation("RocketMission")
+  planet      Planet?     @relation(fields: [planetId], references: [id])
+  planetId    Int?
+}
+
+model Mission {
+  id          Int         @id @default(autoincrement())
+  name        String
+  description String
+  startDate   DateTime
+  endDate     DateTime
+  rocket      Rocket[]    @relation("RocketMission")
+  astronaut   Astronaut[] @relation("AstronautMission")
+  planet      Planet[]    @relation("MissionPlanet")
+}
+
+model Planet {
+  id        Int         @id @default(autoincrement())
+  nom       String
+  taille    Float
+  masse     Float
+  distance  Float
+  astronaut Astronaut[]
+  rocket    Rocket[]
+  mission   Mission[]   @relation("MissionPlanet")
 }
